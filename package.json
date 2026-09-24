@@ -1,0 +1,87 @@
+{
+	"name": "omp-copilot-credits",
+	"version": "0.1.0",
+	"description": "Show remaining GitHub Copilot AI credits, burn rate, and runway in the oh-my-pi status line",
+	"type": "module",
+	"license": "MIT",
+	"author": "Jonah Slack",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/joslack/omp-copilot-credits.git"
+	},
+	"keywords": [
+		"omp",
+		"oh-my-pi",
+		"omp-plugin",
+		"github-copilot"
+	],
+	"files": [
+		"src",
+		"README.md",
+		"LICENSE"
+	],
+	"omp": {
+		"extensions": [
+			"./src/index.ts"
+		],
+		"settings": {
+			"showRemaining": {
+				"type": "boolean",
+				"default": true,
+				"description": "Show credits remaining / entitlement (112,660/125,000)"
+			},
+			"showHourly": {
+				"type": "boolean",
+				"default": true,
+				"description": "Show credits spent in the last hour across all agents (420/h)"
+			},
+			"showDaily": {
+				"type": "boolean",
+				"default": true,
+				"description": "Show average credits per day since the last reset (561/d)"
+			},
+			"showRunway": {
+				"type": "boolean",
+				"default": true,
+				"description": "Show estimated days until credits run out (~201d)"
+			},
+			"showReset": {
+				"type": "boolean",
+				"default": false,
+				"description": "Show the next reset date (↻ Oct 1)"
+			},
+			"numberStyle": {
+				"type": "enum",
+				"values": [
+					"exact",
+					"compact"
+				],
+				"default": "exact",
+				"description": "exact: 112,660/125,000 · compact: 112.7k/125k"
+			},
+			"visibility": {
+				"type": "enum",
+				"values": [
+					"copilot",
+					"always"
+				],
+				"default": "copilot",
+				"description": "copilot: only while a GitHub Copilot model is active · always: whenever quota data exists"
+			},
+			"bucket": {
+				"type": "enum",
+				"values": [
+					"auto",
+					"premium_interactions",
+					"chat"
+				],
+				"default": "auto",
+				"env": "COPILOT_CREDITS_BUCKET",
+				"description": "Which Copilot quota to track; auto picks premium interactions, else chat"
+			}
+		}
+	},
+	"scripts": {
+		"test": "bun test"
+	}
+}
